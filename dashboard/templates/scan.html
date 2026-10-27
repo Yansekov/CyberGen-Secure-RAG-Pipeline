@@ -1,0 +1,7 @@
+{% extends "base.html" %}{% block title %}Scan - {% endblock %}{% block body %}
+<h2 style="margin-top:0">Scan a document</h2><div class="grid">
+<form class="card" method="post" enctype="multipart/form-data"><h3>Upload a file</h3><p class="mut">PDF, DOCX, PPTX, XLSX, HTML, TXT, CSV, JSON, EML, or images (PNG/JPG, read with OCR).</p>
+<input type="file" name="file" multiple required style="margin-bottom:12px"><br><button>Upload and scan</button></form>
+<form class="card" method="post" action="/scan/paste"><h3>Paste text</h3><textarea name="text" rows="4" placeholder="Paste document text here..."></textarea><button>Scan text</button></form>
+<form class="card" method="post" action="/scan/samples"><h3>Try the samples</h3><p class="mut">Scan the built-in documents: clean, injected, hidden, obfuscated, Hindi, PII and more.</p><button class="alt">Scan samples</button></form></div>
+<form method="post" action="/reset" style="margin-top:24px" onsubmit="return confirm('Delete ALL scanned documents, reports and both vector databases? This cannot be undone.')"><button class="alt">Reset all data</button></form>{% endblock %}

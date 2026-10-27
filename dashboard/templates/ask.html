@@ -1,0 +1,9 @@
+{% extends "base.html" %}{% block title %}Ask - {% endblock %}{% block body %}
+<h2 style="margin-top:0">Ask the RAG</h2><p class="mut">The same question, answered from the unprotected database and from the protected one.</p>
+<form><input type="text" name="q" value="{{ q }}" placeholder="What is the refund policy?">
+{% if llm_ok %}<label class="mut"><input type="checkbox" name="llm" value="1" {{ 'checked' if use_llm }}> Use a real LLM ({{ llm_name }})</label>&nbsp;{% else %}<p class="mut">Simulated assistant. Set NVIDIA_API_KEY (or ANTHROPIC_API_KEY / OPENAI_API_KEY) to use a real LLM.</p>{% endif %}<button>Ask</button></form>
+<p class="chips">{% for x in questions %}<a href="/ask?q={{ x | urlencode }}">{{ x }}</a>{% endfor %}</p>
+{% if res %}<div class="cols">{% for key,label,cls in [('naive','Unprotected RAG','bad-b'),('safe','Protected RAG','good-b')] %}
+<div class="card {{ cls }}"><h3>{{ label }}</h3>{% if res[key].hijacked %}<span class="b QUARANTINE">{{ 'POISONED CONTEXT' if res[key].mode.startswith('LLM') else 'HIJACKED' }}</span>{% else %}<span class="b ALLOW">SAFE</span>{% endif %} <span class="mut">{{ res[key].mode }} &middot; {{ res[key].seconds }}s</span>
+<pre style="margin:10px 0">{{ res[key].answer }}</pre><p class="mut">Sources: {% for h in res[key].hits %}{{ h.filename }} ({{ h.score }}){{ ', ' if not loop.last }}{% else %}none{% endfor %}</p></div>{% endfor %}</div>
+{% elif not pending and not docs %}{% endif %}{% endblock %}

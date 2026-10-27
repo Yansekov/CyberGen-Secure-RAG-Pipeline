@@ -1,0 +1,21 @@
+{% extends "base.html" %}{% block title %}{{ d.filename }} - {% endblock %}{% block body %}
+<p><a href="/documents">&larr; All documents</a></p>
+<h2 style="margin-top:0">{{ d.filename }} <span class="b {{ d.decision }}">{{ d.decision }}</span></h2>
+<p class="mut">Risk <span class="bar"><i style="width:{{ d.risk_score }}%"></i></span><b>{{ d.risk_score }}/100</b> &middot; status: {{ d.status }}</p>
+{% if d.status == 'quarantined' %}<div class="card bad-b" style="margin-bottom:14px"><b>This document is quarantined.</b>
+<p class="mut">Approving indexes a sanitized version only (injections removed, PII redacted).</p>
+<form class="inline" method="post" action="/approve/{{ d.doc_id }}"><button class="ok">Approve sanitized</button></form>
+<form class="inline" method="post" action="/reject/{{ d.doc_id }}"><button class="bad">Reject</button></form></div>{% endif %}
+<div class="card"><h3>Why this score</h3><ul>{% for r in d.reasons %}<li>{{ r }}</li>{% else %}<li>No threats or PII found.</li>{% endfor %}</ul>
+{% if d.findings %}<table><tr><th>Type</th><th>Severity</th><th>Matched</th><th>Where</th></tr>
+{% for f in d.findings %}<tr><td>{{ f.type }}</td><td><span class="b {{ f.severity }}">{{ f.severity }}</span></td>
+<td>{{ (f.matched | mask) if f.type == 'pii' else f.matched }}</td><td>{{ f.location }}</td></tr>{% endfor %}</table>{% endif %}</div>
+{% if d.warnings %}<div class="card bad-b" style="margin-top:14px"><h3>File warnings</h3><ul>{% for w in d.warnings %}<li>{{ w.code }}: {{ w.detail }}</li>{% endfor %}</ul></div>{% endif %}
+{% if d.hidden_content %}<div class="card bad-b" style="margin-top:14px"><h3>Hidden content found</h3>
+{% for h in d.hidden_content %}<p class="mut">{{ h.type }}</p><pre>{{ h.text }}</pre>{% endfor %}</div>{% endif %}
+<div class="cols" style="margin-top:14px"><div class="card"><h3>Original (visible text)</h3><pre>{{ d.text }}</pre></div>
+<div class="card good-b"><h3>Sanitized</h3><pre>{{ d.sanitized_text if d.sanitized_text else 'Not indexed.' }}</pre></div></div>
+{% if d.metadata_text or d.links %}<details><summary>Metadata, comments and links scanned</summary><pre>{% for m in d.metadata_text %}[{{ m.location }}] {{ m.text }}
+{% endfor %}{% for l in d.links %}link: {{ l }}
+{% endfor %}</pre></details>{% endif %}
+<details><summary>Audit trail</summary><pre>{{ d.audit_trail | tojson(indent=1) }}</pre></details>{% endblock %}

@@ -1,0 +1,14 @@
+{% extends "base.html" %}{% block body %}
+<section class="hero"><h1>Stop malicious documents before your AI reads them</h1>
+<p>A security layer that scans every document for prompt injection, hidden instructions and personal data, then allows, sanitizes or quarantines it before it reaches the vector database.</p>
+<a class="btn" href="/scan">Scan a document</a> <a class="btn alt" href="/ask">See the difference</a></section>
+<div class="grid"><div class="card stat"><b>{{ total }}</b><span>Documents scanned</span></div>
+<div class="card stat"><b>{{ st.ALLOW }}</b><span>Allowed</span></div><div class="card stat"><b>{{ st.SANITIZE }}</b><span>Sanitized</span></div>
+<div class="card stat"><b>{{ st.QUARANTINE }}</b><span>Quarantined</span></div></div>
+<h2>How it works</h2><div class="grid">
+<div class="card step"><b>1. Extract</b><p class="mut">Reads TXT, HTML, DOCX and PDF and separates hidden content from visible text.</p></div>
+<div class="card step"><b>2. Detect</b><p class="mut">Rules find injection phrases, role overrides, exfiltration and PII, with a reason for each.</p></div>
+<div class="card step"><b>3. Decide</b><p class="mut">The risk score (0-100) picks allow, sanitize or quarantine.</p></div>
+<div class="card step"><b>4. Sanitize</b><p class="mut">Injected sentences are removed and PII is redacted, then the result is re-scanned.</p></div>
+<div class="card step"><b>5. Index</b><p class="mut">Only safe content enters the vector database the RAG reads from.</p></div></div>
+<h2>Recent documents</h2><div class="card">{% include "_table.html" %}</div>{% endblock %}

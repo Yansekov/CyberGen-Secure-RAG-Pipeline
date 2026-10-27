@@ -1,0 +1,6 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{% block title %}{% endblock %}Secure RAG</title><link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"></head><body>
+<header><a class="brand" href="/">SecureRAG</a><nav><a href="/scan">Scan</a><a href="/documents">Documents</a>
+<a href="/documents?f=quarantined">Quarantine{% if pending %}<span class="pill">{{ pending }}</span>{% endif %}</a><a href="/ask">Ask the RAG</a></nav></header>
+<main>{% for m in get_flashed_messages() %}<div class="note">{{ m }}</div>{% endfor %}{% block body %}{% endblock %}</main>
+<footer>CyberGen 2026 &middot; Problem Statement 4 &middot; Secure RAG</footer></body></html>

@@ -1,0 +1,9 @@
+flask>=3.0
+pypdf>=4.0
+pillow>=10.0
+pytesseract>=0.3.10      # image OCR - also needs the Tesseract program installed (see INSTALL.md)
+anthropic>=0.40          # optional: real LLM (set ANTHROPIC_API_KEY)
+openai>=1.0              # optional: real LLM (set OPENAI_API_KEY)
+pytest>=8.0
+reportlab>=4.0           # only used by the tests and sample generation
+# Optional extra PII detection (heavy): pip install presidio-analyzer spacy && python -m spacy download en_core_web_lg

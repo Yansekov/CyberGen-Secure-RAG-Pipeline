@@ -1,0 +1,4 @@
+Customer record - refund request
+
+Customer Ravi Kumar asked about the refund policy. Contact: ravi.k@example.com, phone 9876543210.
+Aadhaar 2345 6789 0123. Card 4111 1111 1111 1111. PAN ABCDE1234F.

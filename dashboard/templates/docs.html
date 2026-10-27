@@ -1,0 +1,5 @@
+{% extends "base.html" %}{% block title %}Documents - {% endblock %}{% block body %}
+<h2 style="margin-top:0">Documents</h2><div class="tabs">
+{% for key,label in [('all','All'),('ALLOW','Allowed'),('SANITIZE','Sanitized'),('QUARANTINE','Quarantined'),('quarantined','Awaiting review')] %}
+<a class="{{ 'on' if f == key }}" href="/documents?f={{ key }}">{{ label }}</a>{% endfor %}</div>
+<div class="card">{% include "_table.html" %}</div>{% endblock %}

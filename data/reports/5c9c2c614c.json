@@ -1,0 +1,45 @@
+{
+  "doc_id": "5c9c2c614c",
+  "filename": "clean_report.txt",
+  "text": "Quarterly Report - Q3\n\nSales grew 8 percent compared with last quarter and the support team met all of its targets.\n\nRefund policy: customers can request a full refund within 30 days of purchase by contacting support.",
+  "raw_text": "Quarterly Report - Q3\n\nSales grew 8 percent compared with last quarter and the support team met all of its targets.\n\nRefund policy: customers can request a full refund within 30 days of purchase by contacting support.",
+  "chunks": [
+    {
+      "id": "chunk_1",
+      "text": "Quarterly Report - Q3\n\nSales grew 8 percent compared with last quarter and the support team met all of its targets.\n\nRefund policy: customers can request a full refund within 30 days of purchase by contacting support."
+    }
+  ],
+  "hidden_content": [],
+  "metadata_text": [],
+  "links": [],
+  "warnings": [],
+  "ocr": null,
+  "findings": [],
+  "risk_score": 0,
+  "reasons": [],
+  "decision": "ALLOW",
+  "sanitized_text": "Quarterly Report - Q3\n\nSales grew 8 percent compared with last quarter and the support team met all of its targets.\n\nRefund policy: customers can request a full refund within 30 days of purchase by contacting support.",
+  "status": "indexed",
+  "audit_trail": [
+    {
+      "stage": "ingestion",
+      "status": "complete",
+      "chunks": 1,
+      "hidden_items": 0,
+      "warnings": 0,
+      "ts": "2026-10-27T05:36:24.876509+00:00"
+    },
+    {
+      "stage": "detection",
+      "status": "complete",
+      "findings_count": 0,
+      "ts": "2026-10-27T05:36:24.885455+00:00"
+    },
+    {
+      "stage": "pipeline",
+      "status": "indexed",
+      "note": "ALLOW -> vector DB",
+      "ts": "2026-10-27T05:36:24.886610+00:00"
+    }
+  ]
+}
